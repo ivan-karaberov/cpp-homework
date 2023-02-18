@@ -39,24 +39,36 @@ namespace my {
 
 		Node* getByIndex(int index) {
 			if (index >= 0) {
-				int counter = 0;
-				for (Node* ptr = head; ptr != NULL; ptr = ptr->next) {
-					if (counter == index) return ptr;
-					counter++;
-				}
+				return HeadToTail(index);
 			}
 
 			if (index < 0) {
-				int counter = -1;
-				for (Node* ptr = tail; ptr != NULL; ptr = ptr->prev) {
-					if (counter == index) return ptr;
-					counter--;
-				}
+				return TailToHead(index);
 			}
 
 			return 0;
 		}
 
+	private:
+		Node* HeadToTail(int index){
+			int counter = 0;
+			for (Node* ptr = head; ptr != NULL; ptr = ptr->next) {
+				if (counter == index) return ptr;
+				counter++;
+			}
+			return 0;
+		}
+
+		Node* TailToHead(int index){
+			int counter = -1;
+			for (Node* ptr = tail; ptr != NULL; ptr = ptr->prev) {
+				if (counter == index) return ptr;
+				counter--;
+			}
+			return 0;
+		}
+
+	public:
 		Node* operator [] (int index) {
 			return getByIndex(index);
 		}
